@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ !isLoginMode ? 'Sign Up' : 'Login'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input type="email" ngModel name="email" required email #emailCtrl="ngModel"></ion-input>
+          </ion-list>
+          <ion-list *ngIf="!emailCtrl.valid && emailCtrl.touched">
+            <ion-label>Ingrese un correo valido</ion-label>
+          </ion-list>
+          <ion-list>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" ngModel name="password" required minlength="6" #passCtrl="ngModel"></ion-input>
+          </ion-list>
+          <ion-list *ngIf="!passCtrl.valid && passCtrl.touched">
+            <ion-label>Ingrese un password valido</ion-label>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-md="6" offset-sm="3">
+          <ion-button color="primary" type="buttom" fill="clear" expand="block" (click)="onSwitchAuthMode()">Swith to {{isLoginMode ? 'Sign up' : 'Login'}}</ion-button>
+          <ion-button color="primary" type="submit" expand="block" (click)="onLogin()" *ngIf="!isLoading" [disabled]="!myForm.valid"> {{!isLoginMode ? 'Sign up' : 'Login'}}</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>

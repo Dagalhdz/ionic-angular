@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/lugares/tabs/ofertas"></ion-back-button>
+        </ion-buttons>
+        <ion-title *ngIf="isLoading">Cargando..</ion-title>
+        <ion-title *ngIf="!isLoading">{{lugar.titulo}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+    <ion-spinner *ngIf="isLoading" color="primary"></ion-spinner>
+    <ion-button *ngIf="!isLoading" class="ion-margin" color="primary" [routerLink]="['/', 'lugares', 'tabs', 'ofertas', 'edit', lugar.firebaseId]">
+        Editar
+    </ion-button>
+</ion-content>
